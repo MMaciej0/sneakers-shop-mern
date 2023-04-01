@@ -1,4 +1,5 @@
 import { Product } from '../types/Product';
+import Rating from './Rating';
 
 const ProductCard = ({ product }: { product: Product }) => {
   return (
@@ -7,7 +8,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         <img
           src={product.image}
           alt={product.name}
-          className="object-cover w-full group-hover:scale-105 duration-200"
+          className="object-contain w-full h-full group-hover:scale-105 duration-200"
         />
       </div>
 
@@ -15,6 +16,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         <h3 className="font-bold text-xl tracking-wide">{product.name}</h3>
         <p>{product.brand}</p>
         <p>${product.price}</p>
+        <Rating rating={product.rating} reviews={product.numReviews} />
       </div>
     </div>
   );
