@@ -6,19 +6,21 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom';
-import axios from 'axios';
 import App from './App';
 import HomePage from './pages/HomePage';
+import SingleProductPage from './pages/SingleProductPage';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import './index.css';
 
-axios.defaults.baseURL =
-  process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : '/';
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} element={<HomePage />} />
+      <Route path="/products/:slug" element={<SingleProductPage />} />
       {/* ... etc. */}
     </Route>
   )
@@ -26,6 +28,9 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   </React.StrictMode>
 );

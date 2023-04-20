@@ -13,6 +13,10 @@ app.get('/api/products', (req: Request, res: Response) => {
   res.json(products);
 });
 
+app.get('/api/products/:slug', (req: Request, res: Response) => {
+  res.json(products.find((product) => product.slug === req.params.slug));
+});
+
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);
 });

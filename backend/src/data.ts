@@ -9,7 +9,8 @@ export const sampleProducts: Product[] = [
     brand: 'Nike',
     price: 79,
     countInStock: 0,
-    description: 'high quality product',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet est exercitationem odio minima aliquam aperiam.',
     rating: 4.5,
     numReviews: 10,
   },
@@ -21,7 +22,8 @@ export const sampleProducts: Product[] = [
     brand: 'Lacoste',
     price: 117,
     countInStock: 10,
-    description: 'high quality product',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet est exercitationem odio minima aliquam aperiam.',
     rating: 4.2,
     numReviews: 334,
   },
@@ -35,7 +37,8 @@ export const sampleProducts: Product[] = [
     rating: 5.0,
     numReviews: 234,
     countInStock: 50,
-    description: 'high quality product',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet est exercitationem odio minima aliquam aperiam.',
   },
   {
     name: 'MULTIX',
@@ -47,7 +50,8 @@ export const sampleProducts: Product[] = [
     brand: 'Adidas',
     numReviews: 345,
     countInStock: 50,
-    description: 'high quality product',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet est exercitationem odio minima aliquam aperiam.',
   },
   {
     name: 'NUCLEUS',
@@ -59,7 +63,8 @@ export const sampleProducts: Product[] = [
     rating: 2.5,
     numReviews: 35,
     countInStock: 23,
-    description: 'high quality product',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet est exercitationem odio minima aliquam aperiam.',
   },
   {
     name: 'SUPER DELUX',
@@ -71,6 +76,7 @@ export const sampleProducts: Product[] = [
     rating: 1.5,
     numReviews: 666,
     countInStock: 67,
-    description: 'high quality product',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet est exercitationem odio minima aliquam aperiam.',
   },
 ];
