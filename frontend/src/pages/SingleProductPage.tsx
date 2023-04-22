@@ -27,16 +27,16 @@ const SingleProductPage = () => {
       {/* product info */}
       <div className="md:ml-6">
         <ul className="flex flex-col justify-center space-y-2 py-4">
-          <li className="border-b-primary/20 border-b-[2px] w-full py-2 text-lg md:text-xl tracking-wide font-bold">
+          <li className="border-b-primary/20 dark:border-b-primaryBg/20 border-b-[2px] w-full py-2 text-lg md:text-xl tracking-wide font-bold">
             <h1>{product.name}</h1>
           </li>
-          <li className="border-b-primary/20 border-b-[2px] w-full py-2 text-lg md:text-xl tracking-wide font-semibold">
+          <li className="border-b-primary/20 dark:border-b-primaryBg/20 border-b-[2px] w-full py-2 text-lg md:text-xl tracking-wide font-semibold">
             <h3>{product.brand}</h3>
           </li>
-          <li className="border-b-primary/20 border-b-[2px] w-full py-2 text-lg md:text-xl tracking-wide font-semibold">
+          <li className="border-b-primary/20 dark:border-b-primaryBg/20 border-b-[2px] w-full py-2 text-lg md:text-xl tracking-wide font-semibold">
             <h3>${product.price}</h3>
           </li>
-          <li className="border-b-primary/20 border-b-[2px] w-full py-2 text-lg md:text-xl">
+          <li className="border-b-primary/20 dark:border-b-primaryBg/20 border-b-[2px] w-full py-2 text-lg md:text-xl">
             <h3>{product.description}</h3>
           </li>
         </ul>

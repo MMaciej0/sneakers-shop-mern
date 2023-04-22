@@ -1,8 +1,11 @@
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { BsFillMoonFill, BsSun } from 'react-icons/bs';
+import useThemeChange from '../hooks/state/useThemeChange';
 
 const Navbar = () => {
+  const { setLight, setDark, theme } = useThemeChange();
   return (
-    <header className="shadow-lg w-full">
+    <header className="shadow-lg w-full dark:border-b-primaryBg/20 dark:border-b-[2px]">
       <nav className="container mx-auto py-4 px-2 md:px-4 flex justify-between">
         <a
           href="/"
@@ -22,10 +25,27 @@ const Navbar = () => {
           </a>
           <a
             href="/signin"
-            className="text-md sm:text-lg font-semibold px-2 sm:px-4 md:px-6 text-black uppercase tracking-wider hover:text-highlight duration-300"
+            className="text-md dark:text-primaryBg dark:hover:text-highlight sm:text-lg font-semibold px-2 sm:px-4 md:px-6 text-black uppercase tracking-wider hover:text-highlight duration-300"
           >
             Login
           </a>
+          {
+            <button>
+              {theme === 'light' ? (
+                <BsFillMoonFill
+                  size={25}
+                  onClick={setDark}
+                  className="hover:text-highlight duration-300"
+                />
+              ) : (
+                <BsSun
+                  size={25}
+                  onClick={setLight}
+                  className="hover:text-highlight duration-300"
+                />
+              )}
+            </button>
+          }
         </div>
       </nav>
     </header>
