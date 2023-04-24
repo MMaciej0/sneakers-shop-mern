@@ -8,11 +8,17 @@ export const sampleProducts: Product[] = [
     category: 'Sport',
     brand: 'Nike',
     price: 79,
-    countInStock: 0,
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet est exercitationem odio minima aliquam aperiam.',
+    description: 'high quality product',
     rating: 4.5,
     numReviews: 10,
+    countInStock: [
+      { size: 38, qty: 11 },
+      { size: 39, qty: 5 },
+      { size: 40, qty: 1 },
+      { size: 41, qty: 0 },
+      { size: 42, qty: 1 },
+      { size: 43, qty: 1 },
+    ],
   },
   {
     name: 'CROCOS',
@@ -21,11 +27,17 @@ export const sampleProducts: Product[] = [
     category: 'Sport',
     brand: 'Lacoste',
     price: 117,
-    countInStock: 10,
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet est exercitationem odio minima aliquam aperiam.',
+    description: 'high quality product',
     rating: 4.2,
     numReviews: 334,
+    countInStock: [
+      { size: 38, qty: 1 },
+      { size: 39, qty: 2 },
+      { size: 40, qty: 1 },
+      { size: 41, qty: 4 },
+      { size: 42, qty: 1 },
+      { size: 43, qty: 1 },
+    ],
   },
   {
     name: 'XT-WINGS 2',
@@ -36,9 +48,15 @@ export const sampleProducts: Product[] = [
     price: 129,
     rating: 5.0,
     numReviews: 234,
-    countInStock: 50,
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet est exercitationem odio minima aliquam aperiam.',
+    description: 'high quality product',
+    countInStock: [
+      { size: 38, qty: 11 },
+      { size: 39, qty: 5 },
+      { size: 40, qty: 1 },
+      { size: 41, qty: 0 },
+      { size: 42, qty: 1 },
+      { size: 43, qty: 1 },
+    ],
   },
   {
     name: 'MULTIX',
@@ -49,9 +67,15 @@ export const sampleProducts: Product[] = [
     rating: 3.5,
     brand: 'Adidas',
     numReviews: 345,
-    countInStock: 50,
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet est exercitationem odio minima aliquam aperiam.',
+    description: 'high quality product',
+    countInStock: [
+      { size: 38, qty: 11 },
+      { size: 39, qty: 5 },
+      { size: 40, qty: 1 },
+      { size: 41, qty: 0 },
+      { size: 42, qty: 1 },
+      { size: 43, qty: 1 },
+    ],
   },
   {
     name: 'NUCLEUS',
@@ -62,9 +86,15 @@ export const sampleProducts: Product[] = [
     brand: 'Puma',
     rating: 2.5,
     numReviews: 35,
-    countInStock: 23,
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet est exercitationem odio minima aliquam aperiam.',
+    description: 'high quality product',
+    countInStock: [
+      { size: 38, qty: 11 },
+      { size: 39, qty: 5 },
+      { size: 40, qty: 1 },
+      { size: 41, qty: 0 },
+      { size: 42, qty: 1 },
+      { size: 43, qty: 1 },
+    ],
   },
   {
     name: 'SUPER DELUX',
@@ -75,8 +105,14 @@ export const sampleProducts: Product[] = [
     brand: 'EA7 Emporio Armani',
     rating: 1.5,
     numReviews: 666,
-    countInStock: 67,
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet est exercitationem odio minima aliquam aperiam.',
+    description: 'high quality product',
+    countInStock: [
+      { size: 38, qty: 11 },
+      { size: 39, qty: 5 },
+      { size: 40, qty: 1 },
+      { size: 41, qty: 0 },
+      { size: 42, qty: 1 },
+      { size: 43, qty: 1 },
+    ],
   },
 ];
