@@ -21,7 +21,9 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={`relative w-full ${active && 'bg-highlight text-black'}
+      className={`relative w-full ${
+        disabled && 'cursor-not-allowed opacity-30'
+      } ${active && 'bg-highlight text-black'}
       ${outline && 'border-[2px] border-highlight'}
       ${!outline && !active && 'bg-highlight/50'}
         ${

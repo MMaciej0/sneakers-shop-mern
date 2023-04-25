@@ -1,21 +1,25 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import * as dotenv from 'dotenv';
 import cors from 'cors';
-import { sampleProducts } from './data';
-import { Product } from './types/Product';
+import mongoose from 'mongoose';
+import { productRouter } from './routers/productRouter';
+import { seedRouter } from './routers/seedRouter';
+
+dotenv.config();
+
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mern-tut';
+
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => console.log('connected to mongo'))
+  .catch(() => console.log('mongo error'));
 
 const app = express();
 const port = 4000;
 app.use(cors());
 
-const products: Product[] = sampleProducts;
-
-app.get('/api/products', (req: Request, res: Response) => {
-  res.json(products);
-});
-
-app.get('/api/products/:slug', (req: Request, res: Response) => {
-  res.json(products.find((product) => product.slug === req.params.slug));
-});
+app.use('/api/products', productRouter);
+app.use('/api/seed', seedRouter);
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);
