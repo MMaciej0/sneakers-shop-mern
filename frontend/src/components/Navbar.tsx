@@ -1,9 +1,11 @@
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { BsFillMoonFill, BsSun } from 'react-icons/bs';
 import useThemeChange from '../hooks/state/useThemeChange';
+import useCartStore from '../hooks/state/useCartStore';
 
 const Navbar = () => {
   const { setLight, setDark, theme } = useThemeChange();
+  const { cartItems } = useCartStore();
   return (
     <header className="shadow-lg w-full dark:border-b-primaryBg/20 dark:border-b-[2px]">
       <nav className="container mx-auto py-4 px-2 md:px-4 flex justify-between">
@@ -19,8 +21,8 @@ const Navbar = () => {
             className="px-6 text-2xl sm:text-4xl relative hover:text-highlight duration-300"
           >
             <AiOutlineShoppingCart />
-            <span className="absolute bottom-3 sm:bottom-4 right-5 sm:right-3 text-sm sm:text-lg font-semibold sm:font-bold px-1 sm:px-2 rounded-full bg-highlight text-black">
-              0
+            <span className="absolute bottom-3 sm:bottom-4 right-5 sm:right-2 text-sm sm:text-lg font-semibold sm:font-bold px-1 sm:px-2 rounded-full bg-highlight text-black">
+              {cartItems.reduce((a, c) => (a += c.quantity), 0)}
             </span>
           </a>
           <a

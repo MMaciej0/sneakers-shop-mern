@@ -22,7 +22,7 @@ const Button = ({
   return (
     <button
       className={`relative w-full ${
-        disabled && 'cursor-not-allowed opacity-30'
+        disabled && 'cursor-not-allowed opacity-30 hover:bg-inherit'
       } ${active && 'bg-highlight text-black'}
       ${outline && 'border-[2px] border-highlight'}
       ${!outline && !active && 'bg-highlight/50'}

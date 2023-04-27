@@ -8,7 +8,8 @@ export const sampleProducts: Product[] = [
     category: 'Sport',
     brand: 'Nike',
     price: 79,
-    description: 'high quality product',
+    description:
+      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore, ducimus.',
     rating: 4.5,
     numReviews: 10,
     countInStock: [
@@ -27,7 +28,8 @@ export const sampleProducts: Product[] = [
     category: 'Sport',
     brand: 'Lacoste',
     price: 117,
-    description: 'high quality product',
+    description:
+      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore, ducimus.',
     rating: 4.2,
     numReviews: 334,
     countInStock: [
@@ -48,7 +50,8 @@ export const sampleProducts: Product[] = [
     price: 129,
     rating: 5.0,
     numReviews: 234,
-    description: 'high quality product',
+    description:
+      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore, ducimus.',
     countInStock: [
       { size: 38, qty: 11 },
       { size: 39, qty: 5 },
@@ -67,7 +70,8 @@ export const sampleProducts: Product[] = [
     rating: 3.5,
     brand: 'Adidas',
     numReviews: 345,
-    description: 'high quality product',
+    description:
+      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore, ducimus.',
     countInStock: [
       { size: 38, qty: 11 },
       { size: 39, qty: 5 },
@@ -86,7 +90,8 @@ export const sampleProducts: Product[] = [
     brand: 'Puma',
     rating: 2.5,
     numReviews: 35,
-    description: 'high quality product',
+    description:
+      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore, ducimus.',
     countInStock: [
       { size: 38, qty: 11 },
       { size: 39, qty: 5 },
@@ -105,7 +110,8 @@ export const sampleProducts: Product[] = [
     brand: 'EA7 Emporio Armani',
     rating: 1.5,
     numReviews: 666,
-    description: 'high quality product',
+    description:
+      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore, ducimus.',
     countInStock: [
       { size: 38, qty: 11 },
       { size: 39, qty: 5 },

@@ -1,18 +1,37 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useGetProductQuery } from '../hooks/productsHooks';
 import MessageBox from '../components/MessageBox';
-import { getError } from '../utils';
+import { convertProductToCartItem, getError } from '../utils';
 import { ApiError } from '../types/ApiError';
 import Loader from '../components/Loader';
 import Button from '../components/Button';
 import { useState } from 'react';
+import useCartStore from '../hooks/state/useCartStore';
+import { Product, ProductStock } from '../types/Product';
 
 const SingleProductPage = () => {
-  const [selectedSize, setSelectedSize] = useState<number | null>(null);
+  const [selectedSize, setSelectedSize] = useState<ProductStock | null>(null);
   const { slug } = useParams();
   const { data: product, error, isLoading } = useGetProductQuery(slug!);
+  const { addToCart, cartItems } = useCartStore();
+  const navigate = useNavigate();
 
-  console.log(selectedSize);
+  const handleAddToCart = (product: Product) => {
+    const productInCart = cartItems.find(
+      (item) => item._id === product._id && item.size === selectedSize?.size
+    );
+    const quantity = productInCart ? productInCart.quantity + 1 : 1;
+    if (quantity > selectedSize!.qty) {
+      toast.warn('Sorry.Product is out of stock.');
+      return;
+    }
+    const cartItem = convertProductToCartItem(product, selectedSize!.size);
+    cartItem.quantity = quantity;
+    addToCart(cartItem);
+    toast('Sneakers added to cart!');
+    navigate('/');
+  };
 
   return isLoading ? (
     <Loader />
@@ -54,14 +73,17 @@ const SingleProductPage = () => {
                 small
                 key={i}
                 label={item.size.toString()}
-                onClick={() => setSelectedSize(item.size)}
-                active={item.size === selectedSize}
+                onClick={() => setSelectedSize(item)}
+                active={item.size === selectedSize?.size}
                 outline
                 disabled={item.qty === 0}
               />
             ))}
           </div>
-          <Button label="Add to cart" onClick={() => {}} />
+          <Button
+            label="Add to cart"
+            onClick={() => handleAddToCart(product)}
+          />
         </div>
       </div>
     </div>
