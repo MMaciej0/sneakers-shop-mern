@@ -30,8 +30,10 @@ const SingleProductPage = () => {
     cartItem.quantity = quantity;
     addToCart(cartItem);
     toast('Sneakers added to cart!');
-    navigate('/');
+    navigate('/cart');
   };
+
+  console.log(product);
 
   return isLoading ? (
     <Loader />
@@ -67,7 +69,7 @@ const SingleProductPage = () => {
         {/* product action */}
         <div className="flex flex-col justify-center py-6">
           <h2 className="text-xl mb-4">Available Sizes:</h2>
-          <div className="flex space-x-2 flex-wrap mb-10">
+          <div className="grid grid-auto-fit mb-10">
             {product.countInStock.map((item, i) => (
               <Button
                 small

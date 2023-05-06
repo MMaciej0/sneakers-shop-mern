@@ -13,7 +13,7 @@ const HomePage = () => {
   ) : error ? (
     <MessageBox variant="danger" text={getError(error as ApiError)} />
   ) : (
-    <div className="max-w-contentContainer mx-auto py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+    <div className="max-w-contentContainer px-4 mx-auto py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
       {products?.map((product) => (
         <ProductCard product={product} key={product.slug} />
       ))}

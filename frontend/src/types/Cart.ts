@@ -7,6 +7,7 @@ export interface CartItem {
   stock: number;
   price: number;
   quantity: number;
+  brand: string;
 }
 
 export interface ShippingAddress {
@@ -26,4 +27,5 @@ export interface Cart {
   shippingAddress: ShippingAddress;
   paymentMethod: string;
   addToCart: (cartItem: CartItem) => void;
+  removeFromCart: (cartItem: CartItem) => void;
 }

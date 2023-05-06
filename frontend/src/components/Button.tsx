@@ -32,7 +32,9 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {Icon && <Icon size={25} className="absolute left-6 top-3" />}
+      {Icon && (
+        <Icon size={25} className="absolute left-6 top-3 hidden sm:block" />
+      )}
       {label}
     </button>
   );

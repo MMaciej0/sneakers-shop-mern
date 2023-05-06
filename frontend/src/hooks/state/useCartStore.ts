@@ -33,6 +33,17 @@ const useCartStore = create<Cart>((set, get) => ({
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
     set({ cartItems: cartItems });
   },
+
+  removeFromCart: (item: CartItem) => {
+    const productToRemove = get().cartItems.find(
+      (product) => product._id === item._id && product.size === item.size
+    );
+    const newCartItems = get().cartItems.filter(
+      (item) => item !== productToRemove
+    );
+    localStorage.setItem('cartItems', JSON.stringify(newCartItems));
+    set({ cartItems: newCartItems });
+  },
 }));
 
 export default useCartStore;

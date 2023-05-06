@@ -14,6 +14,7 @@ export const convertProductToCartItem = (
   return {
     _id: product._id,
     name: product.name,
+    brand: product.brand,
     image: product.image,
     slug: product.slug,
     size: selectedSize,

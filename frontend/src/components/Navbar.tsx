@@ -2,10 +2,12 @@ import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { BsFillMoonFill, BsSun } from 'react-icons/bs';
 import useThemeChange from '../hooks/state/useThemeChange';
 import useCartStore from '../hooks/state/useCartStore';
+import useLoginModal from '../hooks/state/useLoginModal';
 
 const Navbar = () => {
   const { setLight, setDark, theme } = useThemeChange();
   const { cartItems } = useCartStore();
+  const { onOpen } = useLoginModal();
   return (
     <header className="shadow-lg w-full dark:border-b-primaryBg/20 dark:border-b-[2px]">
       <nav className="container mx-auto py-4 px-2 md:px-4 flex justify-between">
@@ -15,22 +17,22 @@ const Navbar = () => {
         >
           SNEAKERS
         </a>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center space-x-2 sm:space-x-6 md:space-x-8 lg:space-x-10">
           <a
             href="/cart"
-            className="px-6 text-2xl sm:text-4xl relative hover:text-highlight duration-300"
+            className="text-2xl sm:text-4xl relative hover:text-highlight duration-300"
           >
             <AiOutlineShoppingCart />
-            <span className="absolute bottom-3 sm:bottom-4 right-5 sm:right-2 text-sm sm:text-lg font-semibold sm:font-bold px-1 sm:px-2 rounded-full bg-highlight text-black">
+            <span className="absolute bottom-3 sm:bottom-4 -right-1 sm:-right-4 text-sm sm:text-lg font-semibold sm:font-bold px-1 sm:px-2 rounded-full bg-highlight text-black">
               {cartItems.reduce((a, c) => (a += c.quantity), 0)}
             </span>
           </a>
-          <a
-            href="/signin"
-            className="text-md dark:text-primaryBg dark:hover:text-highlight sm:text-lg font-semibold px-2 sm:px-4 md:px-6 text-black uppercase tracking-wider hover:text-highlight duration-300"
+          <button
+            onClick={onOpen}
+            className="text-md dark:text-primaryBg dark:hover:text-highlight sm:text-lg font-semibold text-black uppercase tracking-wider hover:text-highlight duration-300"
           >
             Login
-          </a>
+          </button>
           {
             <button>
               {theme === 'light' ? (
