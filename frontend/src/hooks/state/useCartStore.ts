@@ -9,12 +9,6 @@ const useCartStore = create<Cart>((set, get) => ({
   cartItems: localStorage.getItem('cartItems')
     ? JSON.parse(localStorage.getItem('cartItems')!)
     : [],
-  shippingAddress: localStorage.getItem('shippingAddress')
-    ? JSON.parse(localStorage.getItem('shippingAddress')!)
-    : {},
-  paymentMethod: localStorage.getItem('paymentMethod')
-    ? JSON.parse(localStorage.getItem('paymentMethod')!)
-    : 'paypal',
 
   addToCart: (newItem: CartItem) => {
     // check if item is already in cart

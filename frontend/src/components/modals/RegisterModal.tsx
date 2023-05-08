@@ -1,41 +1,43 @@
 import { FcGoogle } from 'react-icons/fc';
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 import Modal from './Modal';
-import useLoginModal from '../../hooks/state/useLoginModal';
 import FormInput from '../inputs/FormInput';
 import Heading from '../Heading';
 import Button from '../Button';
-import { useLoginUser } from '../../hooks/userHooks';
+import { useRegisterUser } from '../../hooks/userHooks';
 import { toast } from 'react-toastify';
 import { getError } from '../../utils';
 import { ApiError } from '../../types/ApiError';
 import useUserStore from '../../hooks/state/useUserStore';
 import useRegisterModal from '../../hooks/state/useRegisterModal';
+import useLoginModal from '../../hooks/state/useLoginModal';
 
 interface InputsProps {
+  name: string;
   email: string;
   password: string;
 }
 
-const LoginModal = () => {
+const RegisterModal = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
+      name: '',
       email: '',
       password: '',
     },
   });
-  const { isOpen, onClose } = useLoginModal();
-  const { onOpen } = useRegisterModal();
-  const { mutateAsync: signin, isLoading } = useLoginUser();
+  const { isOpen, onClose } = useRegisterModal();
+  const { onOpen } = useLoginModal();
+  const { mutateAsync: signup, isLoading } = useRegisterUser();
   const { signUp: saveUserData } = useUserStore();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      const user = await signin(data as InputsProps);
+      const user = await signup(data as InputsProps);
       saveUserData(user);
       toast(`Hello ${user?.name || user?.email}.`, { autoClose: 4000 });
       onClose();
@@ -44,17 +46,25 @@ const LoginModal = () => {
     }
   };
 
-  const handleSignUpButton = () => {
+  const handleSignInButton = () => {
     onClose();
     onOpen();
   };
 
-  const loginBody = (
+  const registerBody = (
     <div className="flex flex-col items-center space-y-6">
       <Heading
         heading="Welcome to SNEAKERS"
-        subheading="Please sign in"
+        subheading="Please sign up"
         center
+      />
+      <FormInput
+        required
+        type="text"
+        id="name"
+        label="Name"
+        register={register}
+        errors={errors}
       />
       <FormInput
         required
@@ -75,7 +85,7 @@ const LoginModal = () => {
     </div>
   );
 
-  const loginFooter = (
+  const registerFooter = (
     <div className="flex flex-col items-center space-y-4">
       <Button
         outline
@@ -84,12 +94,12 @@ const LoginModal = () => {
         onClick={() => {}}
       />
       <p className="pt-4">
-        Don't have an account?{' '}
+        Already have an account?{' '}
         <span
-          onClick={handleSignUpButton}
+          onClick={handleSignInButton}
           className="cursor-pointer font-semibold tracking-wide hover:underline transition"
         >
-          Sign up
+          Sign in
         </span>
       </p>
     </div>
@@ -99,14 +109,14 @@ const LoginModal = () => {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Sign In"
+      title="Sign Up"
       actionLabel="Continue"
-      body={loginBody}
-      footer={loginFooter}
+      body={registerBody}
+      footer={registerFooter}
       onSubmit={handleSubmit(onSubmit)}
       disabled={isLoading}
     />
   );
 };
 
-export default LoginModal;
+export default RegisterModal;

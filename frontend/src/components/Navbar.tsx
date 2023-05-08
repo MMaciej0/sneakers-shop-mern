@@ -1,13 +1,38 @@
-import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { AiOutlineShoppingCart, AiOutlineUser } from 'react-icons/ai';
 import { BsFillMoonFill, BsSun } from 'react-icons/bs';
 import useThemeChange from '../hooks/state/useThemeChange';
 import useCartStore from '../hooks/state/useCartStore';
 import useLoginModal from '../hooks/state/useLoginModal';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import useUserStore from '../hooks/state/useUserStore';
+import { toast } from 'react-toastify';
+import useRegisterModal from '../hooks/state/useRegisterModal';
 
 const Navbar = () => {
+  const [userMenuVisible, setUserMenuVisible] = useState(false);
   const { setLight, setDark, theme } = useThemeChange();
+  const { user, signOut } = useUserStore();
   const { cartItems } = useCartStore();
-  const { onOpen } = useLoginModal();
+  const { onOpen: onLoginModalOpen } = useLoginModal();
+  const { onOpen: onRegisterModalOpen } = useRegisterModal();
+
+  const handleSignOut = () => {
+    toast(`See you later ${user?.name || user?.email}.`, { autoClose: 4000 });
+    setUserMenuVisible(false);
+    signOut();
+  };
+
+  const handleLoginModalOpen = () => {
+    setUserMenuVisible(false);
+    onLoginModalOpen();
+  };
+
+  const handleRegisterModalOpen = () => {
+    setUserMenuVisible(false);
+    onRegisterModalOpen();
+  };
+
   return (
     <header className="shadow-lg w-full dark:border-b-primaryBg/20 dark:border-b-[2px]">
       <nav className="container mx-auto py-4 px-2 md:px-4 flex justify-between">
@@ -18,35 +43,61 @@ const Navbar = () => {
           SNEAKERS
         </a>
         <div className="flex items-center justify-center space-x-2 sm:space-x-6 md:space-x-8 lg:space-x-10">
-          <a
-            href="/cart"
-            className="text-2xl sm:text-4xl relative hover:text-highlight duration-300"
-          >
-            <AiOutlineShoppingCart />
-            <span className="absolute bottom-3 sm:bottom-4 -right-1 sm:-right-4 text-sm sm:text-lg font-semibold sm:font-bold px-1 sm:px-2 rounded-full bg-highlight text-black">
-              {cartItems.reduce((a, c) => (a += c.quantity), 0)}
-            </span>
-          </a>
-          <button
-            onClick={onOpen}
-            className="text-md dark:text-primaryBg dark:hover:text-highlight sm:text-lg font-semibold text-black uppercase tracking-wider hover:text-highlight duration-300"
-          >
-            Login
+          <button className="group relative border-[1px] border-transparent rounded-full p-2 hover:text-highlight hover:shadow-md hover:border-primary/5 duration-300">
+            <Link to="/cart">
+              <AiOutlineShoppingCart size={25} />
+              <span className="absolute text-black font-semibold -top-1 -right-2 px-2 rounded-full bg-highlight group-hover:text-black">
+                {cartItems.reduce((a, c) => (a += c.quantity), 0)}
+              </span>
+            </Link>
           </button>
-          {
-            <button>
-              {theme === 'light' ? (
-                <BsFillMoonFill
-                  size={25}
-                  onClick={setDark}
-                  className="hover:text-highlight duration-300"
-                />
+          <button
+            onClick={() => setUserMenuVisible(!userMenuVisible)}
+            className={`border-[1px] border-transparent rounded-full p-2 hover:text-highlight hover:shadow-md hover:border-primary/5 duration-300 ${
+              userMenuVisible && 'text-highlight shadow-md border-primary/5'
+            }`}
+          >
+            <AiOutlineUser size={25} />
+          </button>
+          {userMenuVisible && (
+            <ul className="absolute z-50 top-16 bg-primaryBg dark:text-primary rounded-lg overflow-hidden shadow-md">
+              {user ? (
+                <>
+                  <li className="cursor-pointer px-8 py-2 hover:bg-highlight/60 transition">
+                    Profile
+                  </li>
+                  <li
+                    onClick={handleSignOut}
+                    className="cursor-pointer px-8 py-2 hover:bg-highlight/60 transition"
+                  >
+                    Sign out
+                  </li>
+                </>
               ) : (
-                <BsSun
-                  size={25}
-                  onClick={setLight}
-                  className="hover:text-highlight duration-300"
-                />
+                <>
+                  <li
+                    onClick={handleRegisterModalOpen}
+                    className="cursor-pointer px-8 py-2 hover:bg-highlight/60 transition"
+                  >
+                    Register
+                  </li>
+                  <li
+                    onClick={handleLoginModalOpen}
+                    className="cursor-pointer px-8 py-2 hover:bg-highlight/60 transition"
+                  >
+                    Login
+                  </li>
+                </>
+              )}
+            </ul>
+          )}
+
+          {
+            <button className="border-[1px] border-transparent rounded-full p-2 hover:text-highlight hover:shadow-md hover:border-primary/5 duration-300">
+              {theme === 'light' ? (
+                <BsFillMoonFill size={25} onClick={setDark} className="" />
+              ) : (
+                <BsSun size={25} onClick={setLight} />
               )}
             </button>
           }
