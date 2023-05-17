@@ -7,7 +7,7 @@ export interface UserInfo {
   paymentMethod?: string;
 }
 
-interface ShippingAddress {
+export interface ShippingAddress {
   fullName: string;
   address: string;
   city: string;

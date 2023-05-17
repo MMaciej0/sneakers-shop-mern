@@ -6,9 +6,12 @@ interface FormInputProps {
   label: string;
   type?: string;
   disabled?: boolean;
-  required: boolean;
+  required?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors<FieldValues>;
+  min?: number;
+  max?: number;
+  pattern?: any;
 }
 
 const FormInput: React.FC<FormInputProps> = ({
@@ -19,6 +22,9 @@ const FormInput: React.FC<FormInputProps> = ({
   required,
   register,
   errors,
+  min,
+  max,
+  pattern,
 }) => {
   return (
     <div className="w-full relative dark:text-primary">
@@ -30,7 +36,7 @@ const FormInput: React.FC<FormInputProps> = ({
         id={id}
         type={type ?? 'text'}
         placeholder=" "
-        {...register(id, { required: required })}
+        {...register(id, { required, min, max, pattern })}
       />
       <label
         className={`cursor-pointer absolute text-md duration-150 transform top-4 left-4 z-10 origin-[0] scale-75 -translate-y-4 text-highlight tracking-wide font-medium peer-blank:scale-100 peer-focus:scale-75 peer-focus:-translate-y-4 peer-focus:text-highlight peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-primary/80`}

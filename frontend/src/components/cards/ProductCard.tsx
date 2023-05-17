@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Product } from '../types/Product';
-import Rating from './Rating';
+import { Product } from '../../types/Product';
+import Rating from '../Rating';
 
 const ProductCard = ({ product }: { product: Product }) => {
   return (

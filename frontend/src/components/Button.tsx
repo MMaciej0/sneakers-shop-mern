@@ -2,12 +2,13 @@ import { IconType } from 'react-icons/lib';
 
 interface ButtonProps {
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
   outline?: boolean;
   icon?: IconType;
   small?: boolean;
   active?: boolean;
   disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset' | undefined;
 }
 
 const Button = ({
@@ -18,6 +19,7 @@ const Button = ({
   small,
   active,
   disabled,
+  type,
 }: ButtonProps) => {
   return (
     <button
@@ -31,6 +33,7 @@ const Button = ({
         }  rounded-md text-lg font-semibold tracking-wide hover:text-black hover:bg-highlight transition duration-500`}
       onClick={onClick}
       disabled={disabled}
+      type={type ?? 'button'}
     >
       {Icon && (
         <Icon size={25} className="absolute left-6 top-3 hidden sm:block" />

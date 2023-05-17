@@ -1,13 +1,14 @@
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useGetProductQuery } from '../hooks/productsHooks';
+
+import { useGetProductQuery } from '../hooks/fetch/productsHooks';
+import useCartStore from '../hooks/state/useCartStore';
 import MessageBox from '../components/MessageBox';
-import { convertProductToCartItem, getError } from '../utils';
-import { ApiError } from '../types/ApiError';
 import Loader from '../components/Loader';
 import Button from '../components/Button';
-import { useState } from 'react';
-import useCartStore from '../hooks/state/useCartStore';
+import { convertProductToCartItem, getError } from '../utils';
+import { ApiError } from '../types/ApiError';
 import { Product, ProductStock } from '../types/Product';
 
 const SingleProductPage = () => {

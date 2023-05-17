@@ -1,16 +1,16 @@
-import { FcGoogle } from 'react-icons/fc';
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { FcGoogle } from 'react-icons/fc';
 import Modal from './Modal';
-import useLoginModal from '../../hooks/state/useLoginModal';
 import FormInput from '../inputs/FormInput';
 import Heading from '../Heading';
 import Button from '../Button';
-import { useLoginUser } from '../../hooks/userHooks';
-import { toast } from 'react-toastify';
-import { getError } from '../../utils';
-import { ApiError } from '../../types/ApiError';
+import useLoginModal from '../../hooks/state/useLoginModal';
 import useUserStore from '../../hooks/state/useUserStore';
 import useRegisterModal from '../../hooks/state/useRegisterModal';
+import { useLoginUser } from '../../hooks/fetch/userHooks';
+import { getError } from '../../utils';
+import { ApiError } from '../../types/ApiError';
 
 interface InputsProps {
   email: string;
