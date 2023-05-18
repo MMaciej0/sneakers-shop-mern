@@ -1,66 +1,46 @@
-import mongoose, { model, models } from 'mongoose';
+import { prop, modelOptions, getModelForClass } from '@typegoose/typegoose';
 
-const stockItemSchema = new mongoose.Schema({
-  size: Number,
-  qty: Number,
-});
+class StockItemClass {
+  @prop({ required: true })
+  public size?: number;
 
-const productSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  slug: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  image: {
-    type: String,
-    required: true,
-  },
-  brand: {
-    type: String,
-    required: true,
-  },
-  category: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-  countInStock: {
-    type: [stockItemSchema],
-    required: true,
-  },
-  rating: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-  numReviews: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-  createdAt: {
-    type: Date,
-    immutable: true,
-    default: () => Date.now(),
-  },
-  updatedAt: {
-    type: Date,
-    default: () => Date.now(),
-  },
-});
+  @prop({ required: true })
+  public qty?: number;
+}
 
-const Product = models.Product || model('Product', productSchema);
+@modelOptions({ schemaOptions: { timestamps: true } })
+export class Product {
+  public _id?: string;
 
-export default Product;
+  @prop({ required: true })
+  public name?: string;
+
+  @prop({ required: true, unique: true })
+  public slug?: string;
+
+  @prop({ required: true })
+  public image?: string;
+
+  @prop({ required: true })
+  public brand?: string;
+
+  @prop({ required: true })
+  public category?: string;
+
+  @prop({ required: true })
+  public description?: string;
+
+  @prop({ required: true, default: 0 })
+  public price?: number;
+
+  @prop({ required: true })
+  public countInStock?: StockItemClass[];
+
+  @prop({ required: true, default: 0 })
+  public rating?: number;
+
+  @prop({ required: true, default: 0 })
+  public numReviews?: number;
+}
+
+export const ProductModel = getModelForClass(Product);

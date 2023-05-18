@@ -1,26 +1,20 @@
-import mongoose, { model, models } from 'mongoose';
+import { prop, modelOptions, getModelForClass } from '@typegoose/typegoose';
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-  },
+@modelOptions({ schemaOptions: { timestamps: true } })
+export class User {
+  public _id?: string;
 
-  email: {
-    type: String,
-    required: true,
-  },
+  @prop({ required: true })
+  public name!: string;
 
-  password: {
-    type: String,
-    required: true,
-  },
+  @prop({ required: true, unique: true })
+  public email!: string;
 
-  isAdmin: {
-    type: Boolean,
-    default: false,
-  },
-});
+  @prop({ required: true })
+  public password!: string;
 
-const User = models.User || model('User', userSchema);
+  @prop({ required: true, default: false })
+  public isAdmin!: boolean;
+}
 
-export default User;
+export const UserModel = getModelForClass(User);

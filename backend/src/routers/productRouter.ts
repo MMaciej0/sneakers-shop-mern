@@ -1,13 +1,13 @@
 import express, { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
-import Product from '../models/productModel';
+import { ProductModel } from '../models/productModel';
 
 export const productRouter = express.Router();
 
 productRouter.get(
   '/',
   asyncHandler(async (req: Request, res: Response) => {
-    const products = await Product.find();
+    const products = await ProductModel.find();
     res.json(products);
   })
 );
@@ -15,7 +15,7 @@ productRouter.get(
 productRouter.get(
   '/:slug',
   asyncHandler(async (req: Request, res: Response) => {
-    const product = await Product.findOne({ slug: req.params.slug });
+    const product = await ProductModel.findOne({ slug: req.params.slug });
     if (product) {
       res.json(product);
     } else {
