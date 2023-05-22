@@ -20,11 +20,11 @@ export const isAuth = (req: Request, res: Response, next: NextFunction) => {
 
   if (authorization) {
     const token = authorization.slice(7, authorization.length);
-    const decoded = jwt.verify(
+    const decode = jwt.verify(
       token,
       process.env.JWT_SECRET || 'somethingsecret'
     );
-    req.user = decoded as {
+    req.user = decode as {
       _id: string;
       name: string;
       email: string;

@@ -11,12 +11,12 @@ orderRouter.post(
   isAuth,
   asyncHandler(async (req: Request, res: Response) => {
     if (req.body.orderItems.length === 0) {
-      res.status(400).json({ message: 'Your cart is empty' });
+      res.status(400).json({ message: 'Cart is empty' });
     } else {
-      const order = await OrderModel.create({
-        orderItems: req.body.orderItems.map((item: Product) => ({
-          ...item,
-          product: item._id,
+      const createdOrder = await OrderModel.create({
+        orderItems: req.body.orderItems.map((x: Product) => ({
+          ...x,
+          product: x._id,
         })),
         shippingAddress: req.body.shippingAddress,
         paymentMethod: req.body.paymentMethod,
@@ -26,7 +26,7 @@ orderRouter.post(
         totalPrice: req.body.totalPrice,
         user: req.user._id,
       });
-      res.status(201).json({ message: 'Order Created', order: order });
+      res.status(201).json({ message: 'Order Created', order: createdOrder });
     }
   })
 );

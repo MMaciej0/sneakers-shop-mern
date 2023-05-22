@@ -1,13 +1,30 @@
 import {
-  prop,
-  modelOptions,
   Ref,
   getModelForClass,
+  modelOptions,
+  prop,
 } from '@typegoose/typegoose';
-import { User } from './userModel';
 import { Product } from './productModel';
+import { User } from './userModel';
 
-export class Item {
+class ShippingAddress {
+  @prop()
+  public fullName?: string;
+  @prop()
+  public address?: string;
+  @prop()
+  public city?: string;
+  @prop()
+  public postalCode?: string;
+  @prop()
+  public country?: string;
+  @prop()
+  public lat?: string;
+  @prop()
+  public lng?: string;
+}
+
+class Item {
   @prop({ required: true })
   public name!: string;
   @prop({ required: true })
@@ -22,23 +39,6 @@ export class Item {
   public product?: Ref<Product>;
 }
 
-export class ShippingAddress {
-  @prop()
-  public fullName?: string;
-  @prop()
-  public address?: string;
-  @prop()
-  public city?: string;
-  @prop()
-  public country?: string;
-  @prop()
-  public postalCode?: string;
-  @prop()
-  public lat?: string;
-  @prop()
-  public lng?: string;
-}
-
 class PaymentResult {
   @prop()
   public paymentId!: string;
@@ -50,21 +50,19 @@ class PaymentResult {
   public email_address!: string;
 }
 
-@modelOptions({ schemaOptions: { timestamps: true } })
+modelOptions({ schemaOptions: { timestamps: true } });
 export class Order {
   public _id!: string;
-
   @prop()
   public orderItems!: Item[];
-
   @prop()
-  public shippingAdress?: ShippingAddress;
+  public shippingAddress?: ShippingAddress;
 
-  @prop()
-  public paymentMethod?: string;
-
-  @prop({ ref: () => User })
+  @prop({ ref: User })
   public user?: Ref<User>;
+
+  @prop({ required: true })
+  public paymentMethod!: string;
 
   @prop()
   public paymentResult?: PaymentResult;

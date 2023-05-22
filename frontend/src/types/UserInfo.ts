@@ -14,3 +14,11 @@ export interface ShippingAddress {
   country: string;
   postalCode: string;
 }
+
+export interface IDUser {
+  _id: string;
+  name: string;
+  email: string;
+  token: string;
+  isAdmin: boolean;
+}

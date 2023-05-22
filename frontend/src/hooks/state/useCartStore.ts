@@ -1,7 +1,13 @@
 import { create } from 'zustand';
 import { Cart, CartItem } from '../../types/Cart';
 
-const useCartStore = create<Cart>((set, get) => ({
+type CartStoreProps = Cart & {
+  addToCart: (cartItem: CartItem) => void;
+  removeFromCart: (cartItem: CartItem) => void;
+  calculateTotals: () => void;
+};
+
+const useCartStore = create<CartStoreProps>((set, get) => ({
   itemsPrice: 0,
   shippingPrice: 0,
   taxPrice: 0,
@@ -37,6 +43,23 @@ const useCartStore = create<Cart>((set, get) => ({
     );
     localStorage.setItem('cartItems', JSON.stringify(newCartItems));
     set({ cartItems: newCartItems });
+  },
+
+  calculateTotals: () => {
+    const round2 = (number: number) => Math.round(number * 100) / 100;
+    const newItemsPrice = round2(
+      get().cartItems.reduce((a, c) => (a += c.quantity * c.price), 0)
+    );
+    const newShippingPrice = newItemsPrice > 200 ? 0 : 15;
+    const newTax = round2(newItemsPrice * 0.18);
+    const newTotal = round2(newItemsPrice + newShippingPrice + newTax);
+    set((state) => ({
+      ...state,
+      itemsPrice: newItemsPrice,
+      shippingPrice: newShippingPrice,
+      taxPrice: newTax,
+      totalPrice: newTotal,
+    }));
   },
 }));
 

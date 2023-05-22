@@ -16,6 +16,4 @@ export interface Cart {
   taxPrice: number;
   totalPrice: number;
   cartItems: CartItem[];
-  addToCart: (cartItem: CartItem) => void;
-  removeFromCart: (cartItem: CartItem) => void;
 }

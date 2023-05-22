@@ -1,12 +1,12 @@
 import { CartItem } from './Cart';
-import { ShippingAddress, UserInfo } from './UserInfo';
+import { ShippingAddress, IDUser } from './UserInfo';
 
 export type Order = {
   _id: string;
   orderItems: CartItem[];
   shippingAdress: ShippingAddress;
   paymentMethod: string;
-  user: UserInfo;
+  user: IDUser;
   createdAt: string;
   isPaid: boolean;
   paidAt: string;

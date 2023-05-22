@@ -10,6 +10,7 @@ import { orderRouter } from './routers/orderRouter';
 dotenv.config();
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mern-tut';
+mongoose.set('strictQuery', true);
 
 mongoose
   .connect(MONGODB_URI)
