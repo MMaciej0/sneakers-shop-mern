@@ -5,9 +5,14 @@ import useCartStore from '../../hooks/state/useCartStore';
 interface SummaryCardProps {
   btnLabel?: string;
   btnAction?: () => void;
+  submitBtn?: boolean;
 }
 
-const SummaryCard: React.FC<SummaryCardProps> = ({ btnLabel, btnAction }) => {
+const SummaryCard: React.FC<SummaryCardProps> = ({
+  btnLabel,
+  btnAction,
+  submitBtn,
+}) => {
   const {
     cartItems,
     itemsPrice,
@@ -41,6 +46,7 @@ const SummaryCard: React.FC<SummaryCardProps> = ({ btnLabel, btnAction }) => {
         <h3>${totalPrice}</h3>
       </div>
       {btnLabel && btnAction && <Button label={btnLabel} onClick={btnAction} />}
+      {btnLabel && submitBtn && <Button label={btnLabel} type="submit" />}
     </div>
   );
 };

@@ -1,10 +1,14 @@
 import { create } from 'zustand';
 import { Cart, CartItem } from '../../types/Cart';
+import { ShippingAddress } from '../../types/UserInfo';
 
 type CartStoreProps = Cart & {
   addToCart: (cartItem: CartItem) => void;
   removeFromCart: (cartItem: CartItem) => void;
   calculateTotals: () => void;
+  updateShippingAddress: (shippingAddress: ShippingAddress) => void;
+  clearCart: () => void;
+  updatePaymentMethod: (method: string) => void;
 };
 
 const useCartStore = create<CartStoreProps>((set, get) => ({
@@ -15,6 +19,10 @@ const useCartStore = create<CartStoreProps>((set, get) => ({
   cartItems: localStorage.getItem('cartItems')
     ? JSON.parse(localStorage.getItem('cartItems')!)
     : [],
+  shippingAddress: localStorage.getItem('shippingAddress')
+    ? JSON.parse(localStorage.getItem('shippingAddress')!)
+    : null,
+  paymentMethod: '',
 
   addToCart: (newItem: CartItem) => {
     // check if item is already in cart
@@ -60,6 +68,21 @@ const useCartStore = create<CartStoreProps>((set, get) => ({
       taxPrice: newTax,
       totalPrice: newTotal,
     }));
+  },
+
+  updateShippingAddress: (shippingAddress: ShippingAddress) => {
+    localStorage.setItem('shippingAddress', JSON.stringify(shippingAddress));
+    set({ shippingAddress: shippingAddress });
+  },
+
+  updatePaymentMethod: (paymentMethod: string) => {
+    localStorage.setItem('paymentMethod', JSON.stringify(paymentMethod));
+    set({ paymentMethod: paymentMethod });
+  },
+
+  clearCart: () => {
+    localStorage.removeItem('cartItems');
+    set({ cartItems: [] });
   },
 }));
 

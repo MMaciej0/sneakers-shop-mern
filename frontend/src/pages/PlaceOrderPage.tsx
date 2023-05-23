@@ -1,13 +1,19 @@
-import React, { FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import useCartStore from '../hooks/state/useCartStore';
 import FormSteps from '../components/FormSteps';
-import useMultistepForm from '../hooks/state/useOrderForm';
 import Button from '../components/Button';
 import ShippingInputs from '../components/inputs/ShippingInputs';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import PaymentMethodsInputs from '../components/inputs/PaymentMethodsInputs';
 import OrderPreview from '../components/OrderPreview';
+import useMultistepForm from '../hooks/state/useOrderForm';
+import { useCreateOrder } from '../hooks/fetch/orderHooks';
+import { getError } from '../utils';
+import { ApiError } from '../types/ApiError';
 
 const PlaceOrderPage = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -24,9 +30,53 @@ const PlaceOrderPage = () => {
     },
   });
 
+  const {
+    updateShippingAddress,
+    cartItems,
+    shippingAddress,
+    paymentMethod: cartPaymentMethod,
+    itemsPrice,
+    shippingPrice,
+    taxPrice,
+    totalPrice,
+    clearCart,
+    updatePaymentMethod,
+  } = useCartStore();
+
+  const { mutateAsync: createOrder, isLoading } = useCreateOrder();
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
-    next();
+    const { fullName, address, city, country, postalCode, paymentMethod } =
+      data;
+    if (isFirstStep) {
+      updateShippingAddress({
+        fullName,
+        address,
+        city,
+        country,
+        postalCode,
+      });
+      next();
+    } else if (currentStepIndex === 1) {
+      updatePaymentMethod(paymentMethod);
+      next();
+    } else if (isLastStep) {
+      try {
+        createOrder({
+          orderItems: cartItems,
+          shippingAdress: shippingAddress,
+          paymentMethod: cartPaymentMethod,
+          itemsPrice: itemsPrice,
+          shippingPrice: shippingPrice,
+          taxPrice: taxPrice,
+          totalPrice: totalPrice,
+        });
+        clearCart();
+        navigate('/');
+      } catch (error) {
+        toast.error(getError(error as ApiError));
+      }
+    }
   };
 
   const changeStep = (index: number) => {
@@ -49,6 +99,7 @@ const PlaceOrderPage = () => {
         changeStep={changeStep}
       />,
     ]);
+
   return (
     <div className="max-w-contentContainer px-4 lg:px-0 mx-auto py-10">
       <FormSteps

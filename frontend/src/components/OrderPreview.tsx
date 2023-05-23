@@ -3,8 +3,7 @@ import Heading from './Heading';
 import InfoCard from './cards/InfoCard';
 import { ShippingAddress } from '../types/UserInfo';
 import useCartStore from '../hooks/state/useCartStore';
-import { Link, useNavigate } from 'react-router-dom';
-import Button from './Button';
+import { useNavigate } from 'react-router-dom';
 import ItemCard from './cards/ItemCard';
 import SummaryCard from './cards/SummaryCard';
 
@@ -66,7 +65,7 @@ const OrderPreview: React.FC<OrderPreviewProps> = ({
         </div>
 
         <div className="flex flex-col space-y-2 px-4 lg:w-1/3 h-full rounded border shadow-md">
-          <SummaryCard btnLabel="Place Order" btnAction={() => {}} />
+          <SummaryCard btnLabel="Place Order" submitBtn />
         </div>
       </div>
     </div>

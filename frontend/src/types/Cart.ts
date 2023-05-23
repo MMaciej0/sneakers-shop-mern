@@ -1,3 +1,5 @@
+import { ShippingAddress } from './UserInfo';
+
 export interface CartItem {
   _id: string;
   name: string;
@@ -16,4 +18,6 @@ export interface Cart {
   taxPrice: number;
   totalPrice: number;
   cartItems: CartItem[];
+  shippingAddress: ShippingAddress;
+  paymentMethod: string;
 }
