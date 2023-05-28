@@ -11,8 +11,10 @@ import useMultistepForm from '../hooks/state/useOrderForm';
 import { useCreateOrder } from '../hooks/fetch/orderHooks';
 import { getError } from '../utils';
 import { ApiError } from '../types/ApiError';
+import useUserStore from '../hooks/state/useUserStore';
 
 const PlaceOrderPage = () => {
+  const { user } = useUserStore();
   const navigate = useNavigate();
   const {
     register,
@@ -21,11 +23,11 @@ const PlaceOrderPage = () => {
     getValues,
   } = useForm<FieldValues>({
     defaultValues: {
-      fullName: '',
-      address: '',
-      city: '',
-      country: '',
-      postalCode: '',
+      fullName: user!.shippingAddress?.fullName ?? '',
+      address: user!.shippingAddress?.address ?? '',
+      city: user!.shippingAddress?.city ?? '',
+      country: user!.shippingAddress?.country ?? '',
+      postalCode: user!.shippingAddress?.postalCode ?? '',
       paymentMethod: '',
     },
   });

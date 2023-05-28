@@ -17,6 +17,7 @@ userRouter.use(
           name: user.name,
           email: user.email,
           isAdmin: user.isAdmin,
+          shippingAddress: user.shippingAddress ?? null,
           token: generateToken(user),
         });
         return;
@@ -73,13 +74,13 @@ userRouter.post(
   isAuth,
   asyncHandler(async (req: Request, res: Response) => {
     const user = await UserModel.findById(req.user._id);
-
+    console.log(req.body);
     if (user) {
       await UserModel.updateOne(
         { _id: req.user._id },
         {
           $set: {
-            shippingAddress: req.body.shippingAddress,
+            shippingAddress: req.body,
           },
         }
       );
