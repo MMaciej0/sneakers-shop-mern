@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
 import { UserModel } from '../models/userModel';
 import bcrypt from 'bcryptjs';
-import { generateToken } from '../utils';
+import { generateToken, isAuth } from '../utils';
 
 export const userRouter = express.Router();
 
@@ -42,5 +42,50 @@ userRouter.post(
       isAdmin: user.isAdmin,
       token: generateToken(user),
     });
+  })
+);
+
+userRouter.post(
+  '/update',
+  isAuth,
+  asyncHandler(async (req: Request, res: Response) => {
+    const user = await UserModel.findById(req.user._id);
+
+    if (user) {
+      await UserModel.updateOne(
+        { _id: req.user._id },
+        {
+          $set: {
+            email: req.body.email,
+            name: req.body.name,
+          },
+        }
+      );
+      res.json(user);
+      return;
+    }
+    res.status(401).json({ message: 'User does not exist' });
+  })
+);
+
+userRouter.post(
+  '/updateShippingAddress',
+  isAuth,
+  asyncHandler(async (req: Request, res: Response) => {
+    const user = await UserModel.findById(req.user._id);
+
+    if (user) {
+      await UserModel.updateOne(
+        { _id: req.user._id },
+        {
+          $set: {
+            shippingAddress: req.body.shippingAddress,
+          },
+        }
+      );
+      res.json(user);
+      return;
+    }
+    res.status(401).json({ message: 'User does not exist' });
   })
 );

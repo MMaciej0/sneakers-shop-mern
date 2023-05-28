@@ -1,16 +1,17 @@
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { AiOutlineShoppingCart, AiOutlineUser } from 'react-icons/ai';
 import { BsFillMoonFill, BsSun } from 'react-icons/bs';
 import useThemeChange from '../hooks/state/useThemeChange';
 import useCartStore from '../hooks/state/useCartStore';
 import useLoginModal from '../hooks/state/useLoginModal';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import useUserStore from '../hooks/state/useUserStore';
-import { toast } from 'react-toastify';
 import useRegisterModal from '../hooks/state/useRegisterModal';
 
 const Navbar = () => {
   const [userMenuVisible, setUserMenuVisible] = useState(false);
+  const navigate = useNavigate();
   const { setLight, setDark, theme } = useThemeChange();
   const { user, signOut } = useUserStore();
   const { cartItems } = useCartStore();
@@ -31,6 +32,11 @@ const Navbar = () => {
   const handleRegisterModalOpen = () => {
     setUserMenuVisible(false);
     onRegisterModalOpen();
+  };
+
+  const handleProfileOpen = () => {
+    setUserMenuVisible(false);
+    navigate('/profile');
   };
 
   return (
@@ -63,7 +69,10 @@ const Navbar = () => {
             <ul className="absolute z-50 top-16 bg-primaryBg dark:text-primary rounded-lg overflow-hidden shadow-md">
               {user ? (
                 <>
-                  <li className="cursor-pointer px-8 py-2 hover:bg-highlight/60 transition">
+                  <li
+                    onClick={handleProfileOpen}
+                    className="cursor-pointer px-8 py-2 hover:bg-highlight/60 transition"
+                  >
                     Profile
                   </li>
                   <li

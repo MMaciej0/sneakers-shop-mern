@@ -1,8 +1,8 @@
-import useCartStore from '../hooks/state/useCartStore';
-import useUserStore from '../hooks/state/useUserStore';
+import useCartStore from '../../hooks/state/useCartStore';
+import useUserStore from '../../hooks/state/useUserStore';
 import { Navigate, Outlet } from 'react-router-dom';
 
-const ProtectedRoute = () => {
+const ProtectedOrderRoute = () => {
   const { user } = useUserStore();
   const { cartItems } = useCartStore();
 
@@ -13,4 +13,4 @@ const ProtectedRoute = () => {
   }
 };
 
-export default ProtectedRoute;
+export default ProtectedOrderRoute;

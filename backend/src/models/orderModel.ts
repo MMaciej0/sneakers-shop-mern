@@ -58,7 +58,7 @@ export class Order {
   @prop()
   public shippingAddress?: ShippingAddress;
 
-  @prop({ ref: User })
+  @prop({ ref: () => User })
   public user?: Ref<User>;
 
   @prop({ required: true })
