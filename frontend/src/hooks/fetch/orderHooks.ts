@@ -8,3 +8,9 @@ export const useCreateOrder = () =>
       (await apiClient.post('/api/orders', order)).data;
     },
   });
+
+export const useGetUserOrders = () =>
+  useQuery({
+    queryKey: ['orders'],
+    queryFn: async () => (await apiClient.get<Order[]>('/api/orders')).data,
+  });

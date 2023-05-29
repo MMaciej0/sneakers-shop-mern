@@ -4,7 +4,7 @@ const MessageBox = ({
   variant = 'info',
   text,
 }: {
-  variant?: string;
+  variant?: 'info' | 'success' | 'danger';
   text: string;
 }) => {
   return (

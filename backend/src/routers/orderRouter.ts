@@ -30,3 +30,16 @@ orderRouter.post(
     }
   })
 );
+
+orderRouter.get(
+  '/',
+  isAuth,
+  asyncHandler(async (req: Request, res: Response) => {
+    const orders = await OrderModel.find({ user: req.user._id });
+    if (orders.length) {
+      res.json(orders);
+    } else {
+      res.status(400).json({ message: 'No orders' });
+    }
+  })
+);

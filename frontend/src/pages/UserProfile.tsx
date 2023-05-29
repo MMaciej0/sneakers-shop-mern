@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import SingleSelectionButtonGroup from '../components/SingleSelectionButtonGroup';
-import UpdateUserProfileForm from '../components/Forms/updateUserProfileForm';
+import UpdateUserProfileForm from '../components/Forms/UpdateUserProfileForm';
 import UpdateUserShippingAddressForm from '../components/Forms/UpdateUserShippingAddressForm';
+import UserOrderHistoryList from '../components/UserOrderHistoryList';
 
 const UserProfile = () => {
   const [selectedTab, setSelectedTab] = useState('Profile');
@@ -17,12 +18,12 @@ const UserProfile = () => {
       </div>
       <div>
         {selectedTab === 'Profile' && (
-          <div>
+          <>
             <UpdateUserProfileForm />
             <UpdateUserShippingAddressForm />
-          </div>
+          </>
         )}
-        {selectedTab === 'Order History' && <div>Order History</div>}
+        {selectedTab === 'Order History' && <UserOrderHistoryList />}
       </div>
     </div>
   );
