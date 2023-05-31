@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import SingleSelectionButtonGroup from '../components/SingleSelectionButtonGroup';
-import UpdateUserProfileForm from '../components/Forms/UpdateUserProfileForm';
-import UpdateUserShippingAddressForm from '../components/Forms/UpdateUserShippingAddressForm';
+import UpdateUserProfileForm from '../components/forms/UpdateUserProfileForm';
+import UpdateUserShippingAddressForm from '../components/forms/UpdateUserShippingAddressForm';
 import UserOrderHistoryList from '../components/UserOrderHistoryList';
 
 const UserProfile = () => {

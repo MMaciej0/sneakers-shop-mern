@@ -1,24 +1,18 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Heading from './Heading';
 import InfoCard from './cards/InfoCard';
-import { ShippingAddress } from '../types/UserInfo';
-import useCartStore from '../hooks/state/useCartStore';
-import { useNavigate } from 'react-router-dom';
 import ItemCard from './cards/ItemCard';
 import SummaryCard from './cards/SummaryCard';
+import useCartStore from '../hooks/state/useCartStore';
 
 interface OrderPreviewProps {
-  shippingAddress: ShippingAddress;
-  paymentMethod: string;
   changeStep: (index: number) => void;
 }
 
-const OrderPreview: React.FC<OrderPreviewProps> = ({
-  shippingAddress,
-  paymentMethod,
-  changeStep,
-}) => {
+const OrderPreview: React.FC<OrderPreviewProps> = ({ changeStep }) => {
   const navigate = useNavigate();
+  const { shippingAddress, paymentMethod } = useCartStore();
   const { fullName, address, city, country, postalCode } = shippingAddress;
 
   const { cartItems } = useCartStore();

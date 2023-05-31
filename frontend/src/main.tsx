@@ -12,10 +12,10 @@ import App from './App';
 import HomePage from './pages/HomePage';
 import SingleProductPage from './pages/SingleProductPage';
 import CartPage from './pages/CartPage';
-import ProtectedOrderRoute from './components/ProtectedRoutes/ProtectedOrderRoute';
 import PlaceOrderPage from './pages/PlaceOrderPage';
 import UserProfile from './pages/UserProfile';
-import ProtectedUserRoute from './components/ProtectedRoutes/ProtectedUserRoute';
+import ProtectedOrderRoute from './components/protectedRoutes/ProtectedOrderRoute';
+import ProtectedUserRoute from './components/protectedRoutes/ProtectedUserRoute';
 
 import './index.css';
 

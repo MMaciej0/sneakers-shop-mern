@@ -20,7 +20,6 @@ const PlaceOrderPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm<FieldValues>({
     defaultValues: {
       fullName: user!.shippingAddress?.fullName ?? '',
@@ -89,17 +88,7 @@ const PlaceOrderPage = () => {
     useMultistepForm([
       <ShippingInputs register={register} errors={errors} />,
       <PaymentMethodsInputs register={register} />,
-      <OrderPreview
-        shippingAddress={{
-          fullName: getValues('fullName'),
-          address: getValues('address'),
-          city: getValues('city'),
-          country: getValues('country'),
-          postalCode: getValues('postalCode'),
-        }}
-        paymentMethod={getValues('paymentMethod')}
-        changeStep={changeStep}
-      />,
+      <OrderPreview changeStep={changeStep} />,
     ]);
 
   return (
@@ -111,8 +100,12 @@ const PlaceOrderPage = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>{step}</div>
         <div className="flex space-x-4 my-8 w-full lg:max-w-2xl mx-auto">
-          {!isFirstStep && <Button label="Back" onClick={back} />}
-          {!isLastStep && <Button type="submit" label="Continue" />}
+          {!isFirstStep && (
+            <Button label="Back" onClick={back} disabled={isLoading} />
+          )}
+          {!isLastStep && (
+            <Button type="submit" label="Continue" disabled={isLoading} />
+          )}
         </div>
       </form>
     </div>

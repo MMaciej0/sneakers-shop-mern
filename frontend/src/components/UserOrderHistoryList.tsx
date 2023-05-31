@@ -1,10 +1,9 @@
-import React from 'react';
-import { useGetUserOrders } from '../hooks/fetch/orderHooks';
 import Loader from './Loader';
 import MessageBox from './MessageBox';
+import InfoCard from './cards/InfoCard';
+import { useGetUserOrders } from '../hooks/fetch/orderHooks';
 import { getError } from '../utils';
 import { ApiError } from '../types/ApiError';
-import InfoCard from './cards/InfoCard';
 import { Order } from '../types/Order';
 
 const UserOrderHistoryList = () => {

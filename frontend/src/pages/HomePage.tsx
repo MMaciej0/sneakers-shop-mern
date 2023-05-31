@@ -1,9 +1,9 @@
 import ProductCard from '../components/cards/ProductCard';
-import { ApiError } from '../types/ApiError';
-import { getError } from '../utils';
 import Loader from '../components/Loader';
 import MessageBox from '../components/MessageBox';
 import { useGetProductsQuery } from '../hooks/fetch/productsHooks';
+import { getError } from '../utils';
+import { ApiError } from '../types/ApiError';
 
 const HomePage = () => {
   const { data: products, error, isLoading } = useGetProductsQuery();
